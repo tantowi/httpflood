@@ -1,49 +1,42 @@
-# Golang-httpflood ![](https://img.shields.io/badge/Version-2.0-brightgreen.svg) ![](https://img.shields.io/badge/license-MIT-blue.svg)
-Using Golang(net/socket) to httpflood
+# httpflood
 
-**Warning: Please use command "ulimit -n 999999" before use this in linux**
+Sending simultaneous and continuous traffic to a webserver or a web application
 
-**1 Threads =  1 connection, 100~300 connections can down a normal website in 10s(specially apache server LOL)**
- 
-**This is golang and threads are just goroutines so you set more higher threads like 1000-5000 is fine.**
+* On Linux, run `ulimit -n 999999` beforehand.
+* Safely create over 1000 simultaneous connections by using golang goroutine.
+* 100~300 connections can down a normal website in 10 seconds, specially apache server.
 
 **Why can it run over 1000 threads(goroutines)? [Read this](http://tleyden.github.io/blog/2014/10/30/goroutines-vs-threads/)**
 
-## INFO
+ - HTTP GET
+ - HTTP POST
+ - Random url
+ - Custom header
 
- - [x] HTTP Get Flood
- - [x] HTTP Post Flood
- - [x] Random url(http get flood)
- - [x] Self edit header(You can use "nil" to use default header)
- - [x] Improved threading control
- - [x] More powerful flood
- - [x] Auto get ip form domain(golang inbuilt function)
- - [x] More format for random url(http get flood)
- - [x] Fixed for 386 systems
- -----------------------------------------------------
  Default header setting:
- - [x] Random user-agents
- - [x] Random data(http post flood) 
- - [x] Random Accpetall
- - [x] Random Referer(only for http get flood)
+ - Random user-agents
+ - Random AcceptAll
+ - Random Referer for GET
+ - Random data for POST 
 
 
-## Download
-***Please download the F\*cking golang at first.***
+# Usage
 
-Then:
-
-    git clone https://github.com/Leeon123/golang-httpflood.git
-
-Header.txt format:
-
+1. Download and install golang
+2. Clone the repository <br>
+    ```
+    $ git clone https://github.com/tantowi/httpflood httpflood
+    $ cd httpflood
+    ```
+3. Compile the application <br>
+    `$ go build`
+4. Create custom `header.txt` file <br>
+    ```
     Accept: text/html
     User-agent: Wget
     Referer: http://google.com
+    ```
+5. Run the application
+    `./httpflood  <url> <threads> <get/post> <seconds> <header.txt/nil>`
 
-Or anything else of http header. If you don't have any idea of this please just use "nil" for using default random header.
-## Usage
 
-    cd golang-httpflood
-    go build httpflood.go
-    ./httpflood  <url> <threads> <get/post> <seconds> <header.txt/nil>
